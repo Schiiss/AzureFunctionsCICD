@@ -40,3 +40,25 @@ stages:
       inputs:
         artifactName: 'zip'
         targetPath: '$(System.DefaultWorkingDirectory)/zip'
+
+
+- stage: Deploy
+  condition:
+    and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn:
+    Build
+  jobs:
+  - job: Deploy_ARM
+    pool:
+      vmImage: windows-2019
+    steps:
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Deploy Function App Resources'
+      inputs:
+        azureSubscription: $(AzureConnection)
+        resourceGroupName: $(ResourcegGroupName)
+        location: 'eastus2'
+        csmFile: Infrastructure/deploy_function_app.json
+        csmParametersFile: Infrastructure/deploy_function_app_parameters.json
+        deploymentMode: Incremental
+        deploymentOutputs: DeploymentOutput
