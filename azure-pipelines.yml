@@ -1,0 +1,48 @@
+name: DeployAzureFunction
+variables:
+  FunctionAppName: 'functionAppCICD'
+  AzureConnection: 'Clyfar Connection'
+  ResourcegGroupName: 'connerDevOps'
+
+trigger:
+  branches:
+    include:
+    - '*' 
+
+
+
+stages:
+
+- stage: Build
+  jobs:
+  - job: Test_FA
+    pool:
+      vmImage: windows-2019
+    steps:
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Test ARM Deployment'
+      inputs:
+        azureSubscription: $(AzureConnection)
+        resourceGroupName: $(ResourcegGroupName)
+        location: 'eastus2'
+        csmFile: Infrastructure/deploy_function_app.json
+        deploymentMode: Validation
+    - powershell: |
+       Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
+       Install-Module -Name Pester -Force -Scope CurrentUser -SkipPublisherCheck
+       Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+      displayName: 'Install Pester and import module'
+  - job: Build_FA
+    pool:
+      vmImage: windows-2019
+    steps:
+    - task: ArchiveFiles@2
+      displayName: 'Archive FunctionApp'
+      inputs:
+        rootFolderOrFile: FunctionApp
+        includeRootFolder: false
+        archiveFile: '$(System.DefaultWorkingDirectory)/zip/FunctionApp.zip'
+    - task: PublishPipelineArtifact@0
+      inputs:
+        artifactName: 'zip'
+        targetPath: '$(System.DefaultWorkingDirectory)/zip'
