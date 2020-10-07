@@ -26,6 +26,7 @@ stages:
         resourceGroupName: $(ResourcegGroupName)
         location: 'eastus2'
         csmFile: Infrastructure/deploy_function_app.json
+        csmParametersFile: Infrastructure/deploy_function_app_parameters.json
         deploymentMode: Validation
     - powershell: |
        Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
