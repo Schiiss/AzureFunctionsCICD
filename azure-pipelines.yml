@@ -2,6 +2,7 @@ name: DeployAzureFunction
 variables:
   AzureConnection: 'DevOps Connection'
   ResourcegGroupName: 'connerDevOps'
+  FunctionAppName: "functionappcicd98765"
 
 trigger:
   branches:
