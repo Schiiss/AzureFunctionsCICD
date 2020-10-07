@@ -1,6 +1,5 @@
 name: DeployAzureFunction
 variables:
-  FunctionAppName: 'functionAppCICD'
   AzureConnection: 'DevOps Connection'
   ResourcegGroupName: 'connerDevOps'
 
@@ -12,7 +11,6 @@ trigger:
 
 
 stages:
-
 - stage: Build
   jobs:
   - job: Test_FA
@@ -28,11 +26,6 @@ stages:
         csmFile: Infrastructure/deploy_function_app.json
         csmParametersFile: Infrastructure/deploy_function_app_parameters.json
         deploymentMode: Validation
-    - powershell: |
-       Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
-       Install-Module -Name Pester -Force -Scope CurrentUser -SkipPublisherCheck
-       Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
-      displayName: 'Install Pester and import module'
   - job: Build_FA
     pool:
       vmImage: windows-2019
