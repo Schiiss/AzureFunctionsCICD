@@ -1,7 +1,7 @@
 name: DeployAzureFunction
 variables:
   FunctionAppName: 'functionAppCICD'
-  AzureConnection: 'Clyfar Connection'
+  AzureConnection: 'DevOps Connection'
   ResourcegGroupName: 'connerDevOps'
 
 trigger:
