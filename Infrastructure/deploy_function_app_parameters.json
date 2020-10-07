@@ -6,7 +6,7 @@
             "value": "c2c6e684-985c-4a2e-98ea-128c6d48609b"
         },
         "name": {
-            "value": "functionappcicd"
+            "value": "functionappcicd98765"
         },
         "location": {
             "value": "EastUS2"
@@ -15,13 +15,13 @@
             "value": ""
         },
         "hostingPlanName": {
-            "value": "webfarmcicd"
+            "value": "webfarmcicd98765"
         },
         "serverFarmResourceGroup": {
             "value": "connerdevops"
         },
         "storageAccountName": {
-            "value": "storageaccountcicd4455"
+            "value": "storageaccountcicd98765"
         },
         "sku": {
             "value": "Consumption"
@@ -39,7 +39,7 @@
             "value": "1"
         },
         "aiName": {
-            "value": "aicicd"
+            "value": "aicicd98765"
         },
         "keyName": {
             "value": "funcKey"
