@@ -1,0 +1,16 @@
+{
+    "sithLords": [
+        {
+            "firstName": "Darth",
+            "lastName": "Revan",
+            "born": "3994 BBY",
+            "species": "Human"
+        },
+        {
+            "firstName": "Darth",
+            "lastName": "Nihilus",
+            "born": "3951 BBY",
+            "species": "Human"
+        }
+    ]
+}
