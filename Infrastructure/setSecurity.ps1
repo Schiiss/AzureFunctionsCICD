@@ -16,4 +16,5 @@ $msiId
 Set-AzKeyVaultAccessPolicy -VaultName connerCiCD `
                            -ObjectId $msiId `
                            -PermissionsToSecrets get,list `
-                           -PassThru
+                           -PassThru `
+                           -BypassObjectIdValidation
