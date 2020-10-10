@@ -63,7 +63,13 @@ stages:
         csmParametersFile: Infrastructure/deploy_function_app_parameters.json
         deploymentMode: Incremental
         deploymentOutputs: DeploymentOutput
-
+    - task: AzurePowerShell@3
+      displayName: 'Set FA Permissions'
+      inputs:
+        azureSubscription: $(AzureConnection)
+        ScriptPath: Infrastructure/setSecurity.ps1
+        ScriptArguments: '-DeploymentOutput ''$(DeploymentOutput)'''
+        azurePowerShellVersion: LatestVersion     
   - job: Deploy_FA
     dependsOn:
       Deploy_ARM
