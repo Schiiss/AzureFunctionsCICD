@@ -43,6 +43,12 @@
         },
         "aiName": {
             "type": "string"
+        },
+        "databricksPAT": {
+            "type": "string"
+        },
+         "databricksURL": {
+            "type": "string"
         }
     },
     "variables": {
@@ -62,6 +68,9 @@
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"
             ],
+            "identity": {
+                "type": "SystemAssigned"
+            },
             "properties": {
                 "name": "[parameters('name')]",
                 "siteConfig": {
@@ -73,6 +82,14 @@
                         {
                             "name": "FUNCTIONS_WORKER_RUNTIME",
                             "value": "powershell"
+                        },
+                        {
+                            "name": "DatabricksPAT",
+                            "value": "[parameters('databricksPAT')]"
+                        },
+                        {
+                            "name": "DatabricksURL",
+                            "value": "[parameters('databricksURL')]"
                         },
                         {
                             "name": "WEBSITE_USE_PLACEHOLDER",

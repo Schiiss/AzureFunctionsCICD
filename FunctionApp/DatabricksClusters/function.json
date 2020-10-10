@@ -7,7 +7,9 @@
       "name": "Request",
       "methods": [
         "get",
-        "post"
+        "post",
+        "delete",
+        "put"
       ]
     },
     {

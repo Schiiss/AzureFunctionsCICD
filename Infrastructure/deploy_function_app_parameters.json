@@ -43,6 +43,12 @@
         },
         "keyName": {
             "value": "funcKey"
+        },
+        "databricksPAT": {
+            "value": "https://connercicd.vault.azure.net/secrets/databricksPAT/5c7606dbd5ee4ca986dc15414610c7da"
+        },
+         "databricksURL": {
+            "value": "adb-6382248370565682.2.azuredatabricks.net"
         }
     }
 }
