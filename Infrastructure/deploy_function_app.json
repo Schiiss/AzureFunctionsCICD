@@ -85,7 +85,7 @@
                         },
                         {
                             "name": "DatabricksPAT",
-                            "value": "[parameters('databricksPAT')]"
+                            "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('databricksPAT'), ')')]"
                         },
                         {
                             "name": "DatabricksURL",
