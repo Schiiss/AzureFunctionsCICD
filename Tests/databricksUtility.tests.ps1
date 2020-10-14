@@ -1,4 +1,4 @@
-using module ..\FunctionApp\Modules\databricksUtility.psm1
+using module ../FunctionApp/Modules/databricksUtility.psm1
 $clusterUtilityHelper = [ClusterUtility]::new()
 
 Describe "Cluster Utilities" {
