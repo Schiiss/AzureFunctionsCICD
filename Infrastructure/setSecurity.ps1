@@ -6,7 +6,7 @@ nullptr
 #>
 [cmdletbinding(SupportsShouldProcess = $true)]
 param(
-    [string]$subId = "c774d2e1-02de-43c2-a9c7-3c1ba6372734"
+    [string]$subId = "c2c6e684-985c-4a2e-98ea-128c6d48609b"
 )
 
 . "$PSScriptRoot.\azureCmdltUtility.ps1"
