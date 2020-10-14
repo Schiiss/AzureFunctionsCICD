@@ -27,6 +27,24 @@ stages:
         csmFile: Infrastructure/deploy_function_app.json
         csmParametersFile: Infrastructure/deploy_function_app_parameters.json
         deploymentMode: Validation
+    - powershell: |
+        Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
+        Install-Module -Name Pester -Force -Scope CurrentUser -SkipPublisherCheck
+        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+      displayName: 'Install Pester and import module'
+    - powershell: |
+        $outputFile = ".\testResults.xml"
+        Invoke-Pester -OutputFile $outputFile -OutputFormat NUnitXml -enableExit
+      failOnStderr: false
+      displayName: 'Invoke-Pester'
+    - task: PublishTestResults@2
+      displayName: Publish Test Results
+      inputs:
+        testRunTitle: 'Test Results for Pester'
+        buildPlatform: 'Windows'
+        testRunner: 'NUnit'
+        testResultsFiles: './testResults.xml'
+        failTaskOnFailedTests: true 
   - job: Build_FA
     pool:
       vmImage: windows-2019
