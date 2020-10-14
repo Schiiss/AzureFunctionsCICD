@@ -3,7 +3,7 @@
 nullptr
 #>
 param(
-    [string]$subId = "c2c6e684-985c-4a2e-98ea-128c6d48609b"
+    [string]$subId
 )
 
 . "$PSScriptRoot.\azureCmdltUtility.ps1"
