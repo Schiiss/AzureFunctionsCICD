@@ -10,6 +10,7 @@ param(
 
 $authHelper = [Auth]::new($subId)
 $functionAppHelper = [FunctionApps]::new()
+$keyVaultHelper = [KeyVaults]::new()
 
 Write-Host "Checking Subscription"
 $checkSubId = $authHelper.CheckSubscriptionContext()
@@ -28,10 +29,8 @@ $faObject = $functionAppHelper.GetFunctionApp("functionappcicd98765", "connerDev
 
 $msiId = $faObject.IdentityPrincipalId
 
-$msiId
+Write-Output ("Found MSI for function app with the ID {0}" -f $msiId)
 
-Set-AzKeyVaultAccessPolicy -VaultName connerCiCD `
-                           -ObjectId $msiId `
-                           -PermissionsToSecrets get,list `
-                           -PassThru `
-                           -BypassObjectIdValidation
+Write-Output ("Adding MSI to KV")
+
+$keyVaultHelper.SetKeyVaultSecretPolicy("connerCiCD", $msiId)
