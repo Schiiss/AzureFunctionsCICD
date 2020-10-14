@@ -44,7 +44,7 @@ stages:
         buildPlatform: 'Windows'
         testRunner: 'NUnit'
         testResultsFiles: './testResults.xml'
-        failTaskOnFailedTests: true 
+        failTaskOnFailedTests: false 
   - job: Build_FA
     pool:
       vmImage: windows-2019
