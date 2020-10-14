@@ -9,6 +9,7 @@ param(
 . "$PSScriptRoot.\azureCmdltUtility.ps1"
 
 $authHelper = [Auth]::new($subId)
+$functionAppHelper = [FunctionApps]::new()
 
 Write-Host "Checking Subscription"
 $checkSubId = $authHelper.CheckSubscriptionContext()
@@ -23,7 +24,7 @@ else {
     Write-Output ("Correct Subscription: {0}" -f $validatedSubId)
 }
 
-$faObject = Get-AzFunctionApp -Name functionappcicd98765 -ResourceGroupName connerDevOps
+$faObject = $functionAppHelper.GetFunctionApp("functionappcicd98765", "connerDevOps")
 
 $msiId = $faObject.IdentityPrincipalId
 
