@@ -1,9 +1,8 @@
-using module ./FunctionApp/Modules/databricksUtility.psm1
-$clusterUtilityHelper = [ClusterUtility]::new()
+using module ..\FunctionApp\Modules\databricksUtility.psm1
 
 Describe "Cluster Utilities" {
     $clusterName = "test1"
-    $clusterUtilityHelper.GetClusterConfig($clusterName)
+    $clusterConfig = [ClusterUtility]::GetClusterConfig($clusterName)
 
     It "Returns Cluster Name"{
         $clusterConfig.cluster_name | Should -Be $clusterName
