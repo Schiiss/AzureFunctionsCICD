@@ -13,10 +13,7 @@ switch($httpMethod){
     "GET"{
         Push-OutputBinding -Name response -Value ([HttpResponseContext]@{
             StatusCode = 200
-            Body       = @{
-                clusterId   = $clusters.Clusters.cluster_id
-                clusterName = $clusters.Clusters.cluster_name
-            }
+            Body       = $clusters
         })
     }
     "POST"{
