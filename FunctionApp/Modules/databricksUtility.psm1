@@ -24,11 +24,24 @@ class DatabricksCLI {
 
     [object]ListClusters() {
         $uri = "https://{0}/api/2.0/clusters/list" -f $this.url
-        return $this.ExecuteADPAPICall($uri, "Get")
+        return $this.ExecuteAPICall($uri, "Get")
+    }
+
+    [void]CreateCluster([object]$clusterConfig){
+        Write-Verbose ("Creating cluster {0}" -f $clusterConfig)
+        $uri = "https://{0}/api/2.0/clusters/create" -f $this.url
+        $this.ExecuteAPICall($uri, "Post", ($clusterConfig | ConvertFrom-Json))
+    }
+
+    [object]ExecuteAPICall([string]$uri,[string]$method,[string]$body){
+        Write-Information ("Body: " -f ($body | Out-String))
+        $response = Invoke-WebRequest -Method $method -Uri $uri -Headers $this.GetHeaders() -Body $body -Verbose
+        Write-Information ("RESPONSE: {0}" -f $response)
+        return ($response | ConvertFrom-Json)
     }
 
     [object]ExecuteAPICall([string]$url, [string]$method) {
-        $response = Invoke-WebRequest -Method $method -Uri $url -Headers $this.GetADBHeaders() 
+        $response = Invoke-WebRequest -Method $method -Uri $url -Headers $this.GetHeaders() 
         Write-Verbose ("RESPONSE: {0}" -f $response)
         return ($response | ConvertFrom-Json)
     }
